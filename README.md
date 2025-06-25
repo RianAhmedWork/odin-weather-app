@@ -1,1 +1,1 @@
-It's a basic template for a webpack project
+This is a simple weather app built mainly using asynchronus programming and objects.
