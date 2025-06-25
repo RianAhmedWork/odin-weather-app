@@ -1,4 +1,5 @@
 import "./styles/main.css";
-import { getLocationData } from "./components/logic";
+import { searchLocation } from "./components/domLogic";
 
-getLocationData();
+//getLocationData();
+searchLocation();

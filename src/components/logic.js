@@ -1,7 +1,8 @@
 export {getLocationData}
 
-async function getLocationData() {
-    const search = await fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=2JD7QNU3CZCB4MPLH6EXHAUFV", {mode: "cors"});
+async function getLocationData(query) {
+    const url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + query + "?key=2JD7QNU3CZCB4MPLH6EXHAUFV";
+    const search = await fetch(url, {mode: "cors"});
     const locationData = await search.json();
     const temperature = locationData.currentConditions.temp;
     const description = locationData.description;
@@ -20,8 +21,8 @@ async function getLocationData() {
 
 class Location{
     constructor(temperatureF, description, condition, iconData, name, time, upcomingDays) {
-        this.temperatureF = temperatureF;
-        this.temperatureC = (temperatureF - 32) / 1.8;
+        this.temperatureF = temperatureF.toFixed(1);
+        this.temperatureC = ((temperatureF - 32) / 1.8).toFixed(1);
         this.description = description;
         this.condition = condition;
         this.iconData = iconData;
