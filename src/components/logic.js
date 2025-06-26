@@ -7,6 +7,9 @@ async function getLocationData(query) {
       query +
       "?key=2JD7QNU3CZCB4MPLH6EXHAUFV";
     const search = await fetch(url, { mode: "cors" });
+    if (!search.ok) {
+      throw new Error(`HTTP error! error code: ${search.status}`);
+    }
     const locationData = await search.json();
     const temperature = locationData.currentConditions.temp;
     const description = locationData.description;
@@ -29,8 +32,10 @@ async function getLocationData(query) {
     console.log(upcomingDays);
     console.log(temperature);
     console.log(description, condition, iconData, name, time);
+    return currentLocation;
   } catch (error) {
     console.log(`There has been an error ${error}`);
+    return error;
   }
 }
 
