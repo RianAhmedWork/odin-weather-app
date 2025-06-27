@@ -13,13 +13,41 @@ function searchLocation() {
   });
 }
 
+// Displays the data from the user result
 function displayData(result) {
-  const main = document.querySelector("main");
   if (result instanceof Error) {
-    main.innerHTML = "";
-    const errorHeading = document.createElement("h2");
-    errorHeading.textContent =
-      "There seems to have been an error please try again or search something else.";
-    main.appendChild(errorHeading);
+    clearMain();
+    createErrorTitle();
+  } else {
+    clearMain();
+    createToggleButton();
+    createCurrentDay();
   }
+}
+
+// Clears html content of the main tag
+function clearMain() {
+  const main = document.querySelector("main");
+  main.innerHTML = "";
+}
+
+// Creates and appends an error title to the main tag
+function createErrorTitle() {
+  const main = document.querySelector("main");
+  const errorTitle = document.createElement("h2");
+  errorTitle.textContent =
+    "There seems to have been an error please try again or search something else.";
+  main.appendChild(errorTitle);
+}
+
+// Creates and appends a toggle temperature button to the main
+function createToggleButton() {
+  const main = document.getElementById("main");
+  const toggleButton = document.querySelector("button");
+  toggleButton.textContent = "Toggle Temperature";
+  main.appendChild(toggleButton);
+}
+
+function createCurrentDay() {
+  const main = document.getElementById("main");
 }
