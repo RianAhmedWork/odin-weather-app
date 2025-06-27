@@ -20,8 +20,10 @@ function displayData(result) {
     createErrorTitle();
   } else {
     clearMain();
+    createLocationTitle(result);
     createToggleButton();
-    //createCurrentDay(result);
+    createCurrentDay(result);
+    //createUpcomingDays(result);
   }
 }
 
@@ -40,6 +42,13 @@ function createErrorTitle() {
   main.appendChild(errorTitle);
 }
 
+function createLocationTitle(result) {
+  const main = document.querySelector("main");
+  const locationTitle = document.createElement("h2");
+  locationTitle.textContent = result.name;
+  main.appendChild(locationTitle);
+}
+
 // Creates and appends a toggle temperature button to the main
 function createToggleButton() {
   const main = document.querySelector("main");
@@ -50,9 +59,42 @@ function createToggleButton() {
 
 function createCurrentDay(result) {
   const icon = document.createElement("img");
-  icon.src = "./assets/icons/day/svg";
+  icon.src = "./assets/icons/day.svg";
   icon.alt = "icon";
 
   const temperature = document.createElement("h2");
-  temperature.textContent = `${result.temperatureF} Degrees Farenheight`;
+  temperature.textContent = `${result.days[0].temp} Degrees Farenheight`;
+
+  const temperatureWeatherDiv = document.createElement("div");
+  temperatureWeatherDiv.id = "temp-weather";
+  temperatureWeatherDiv.append(icon, temperature);
+
+  const condition = document.createElement("p");
+  condition.textContent = result.days[0].conditions;
+
+  const date = document.createElement("p");
+  date.textContent = result.days[0].datetime;
+
+  const dateConditionDiv = document.createElement("div");
+  dateConditionDiv.id = "date-condition";
+  dateConditionDiv.append(condition, date);
+
+  const description = document.createElement("p");
+  description.textContent = result.days[0].description;
+
+  const currentDayDiv = document.createElement("div");
+  currentDayDiv.append(temperatureWeatherDiv, dateConditionDiv, description);
+
+  const main = document.querySelector("main");
+  main.appendChild(currentDayDiv);
+}
+
+function createUpcomingDays(result) {
+  result.upcomingDays.forEach((day) => {
+    const icon = document.createElement("img");
+    icon.src = "./assets/icons/day.svg";
+
+    const temperature = document.createElement("p");
+    //temperature.textContent = day.
+  });
 }
