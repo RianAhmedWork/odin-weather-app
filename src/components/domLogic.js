@@ -21,7 +21,7 @@ function displayData(result) {
   } else {
     clearMain();
     createToggleButton();
-    createCurrentDay(result);
+    //createCurrentDay(result);
   }
 }
 
@@ -42,10 +42,10 @@ function createErrorTitle() {
 
 // Creates and appends a toggle temperature button to the main
 function createToggleButton() {
-  const main = document.getElementById("main");
-  const toggleButton = document.querySelector("button");
+  const main = document.querySelector("main");
+  const toggleButton = document.createElement("button");
   toggleButton.textContent = "Toggle Temperature";
-  main.appendChild(toggleButton);
+  main.append(toggleButton);
 }
 
 function createCurrentDay(result) {
