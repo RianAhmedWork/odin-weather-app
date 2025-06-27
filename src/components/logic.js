@@ -56,6 +56,6 @@ class Location {
     this.iconData = iconData;
     this.name = name;
     this.time = time;
-    this.upcomingDays = upcomingDays;
+    this.upcomingDays = upcomingDays.splice(6, upcomingDays.length);
   }
 }

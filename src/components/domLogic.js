@@ -21,7 +21,7 @@ function displayData(result) {
   } else {
     clearMain();
     createToggleButton();
-    createCurrentDay();
+    createCurrentDay(result);
   }
 }
 
@@ -48,6 +48,11 @@ function createToggleButton() {
   main.appendChild(toggleButton);
 }
 
-function createCurrentDay() {
-  const main = document.getElementById("main");
+function createCurrentDay(result) {
+  const icon = document.createElement("img");
+  icon.src = "./assets/icons/day/svg";
+  icon.alt = "icon";
+
+  const temperature = document.createElement("h2");
+  temperature.textContent = `${result.temperatureF} Degrees Farenheight`;
 }
