@@ -117,50 +117,22 @@ function createUpcomingDays(result) {
 }
 
 function setIcon(icon, iconData) {
-  if (iconData === "snow") {
-    import("../assets/icons/snow.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "rain") {
-    import("../assets/icons/rain.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "fog") {
-    import("../assets/icons/fog.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "wind") {
-    import("../assets/icons/wind.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "cloudy") {
-    import("../assets/icons/cloudy.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "partly-cloudy-day") {
-    import("../assets/icons/partly-cloudy-day.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "partly-cloudy-night") {
-    import("../assets/icons/partly-cloudy-night.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "clear-day") {
-    import("../assets/icons/clear-day.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  } else if (iconData === "clear-night") {
-    import("../assets/icons/clear-night.svg").then((module) => {
-      icon.src = module.default;
-      icon.alt = iconData;
-    });
-  }
+  const iconMap = {
+    snow: "snow.svg",
+    rain: "rain.svg",
+    fog: "fog.svg",
+    wind: "wind.svg",
+    cloudy: "cloudy.svg",
+    "partly-cloudy-day": "partly-cloudy-day.svg",
+    "partly-cloudy-night": "partly-cloudy-night.svg",
+    "clear-day": "clear-day",
+    "night-day": "clear-night",
+  };
+
+  const fileName = iconMap[iconData];
+
+  import(`../assets/icons/${fileName}`).then((module) => {
+    icon.src = module.default;
+    icon.alt = iconData;
+  });
 }
