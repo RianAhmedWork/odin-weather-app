@@ -8,6 +8,8 @@ function searchLocation() {
   button.addEventListener("click", async (event) => {
     event.preventDefault();
     //console.log("hello");
+    clearMain();
+    createLoadingTitle();
     const result = await getLocationData(userQuery.value.trim().toLowerCase());
     displayData(result);
   });
@@ -36,27 +38,35 @@ function clearMain() {
 // Creates and appends an error title to the main tag
 function createErrorTitle() {
   const main = document.querySelector("main");
-  const errorTitle = document.createElement("h2");
-  errorTitle.textContent =
-    "There seems to have been an error please try again or search something else.";
+  const errorTitle = createTextElement(
+    "h2",
+    "There seems to have been an error please try again or search something else."
+  );
   main.appendChild(errorTitle);
 }
 
+// Creates and appends a loading title while getting the data
+function createLoadingTitle() {
+  const main = document.querySelector("main");
+  const loadingTitle = createTextElement("h2", "Loading Data");
+  main.appendChild(loadingTitle);
+}
+
+// Creates and appends the name of the location
 function createLocationTitle(result) {
   const main = document.querySelector("main");
-  const locationTitle = document.createElement("h2");
-  locationTitle.textContent = result.name;
+  const locationTitle = createTextElement("h2", result.name);
   main.appendChild(locationTitle);
 }
 
 // Creates and appends a toggle temperature button to the main
 function createToggleButton() {
   const main = document.querySelector("main");
-  const toggleButton = document.createElement("button");
-  toggleButton.textContent = "Toggle Temperature";
+  const toggleButton = createTextElement("button", "Toggle Temperature");
   main.append(toggleButton);
 }
 
+// Creates and appends the current day with weather information
 function createCurrentDay(result) {
   const icon = document.createElement("img");
   setIcon(icon, result.days[0].icon);
@@ -88,6 +98,7 @@ function createCurrentDay(result) {
   main.appendChild(currentDayDiv);
 }
 
+// creates and appends the remaing days weather information
 function createUpcomingDays(result) {
   const main = document.querySelector("main");
   const upcomingDaysDiv = document.createElement("div");
@@ -116,6 +127,7 @@ function createUpcomingDays(result) {
   main.appendChild(upcomingDaysDiv);
 }
 
+// Sets the icon to the appropriate svg
 function setIcon(icon, iconData) {
   const iconMap = {
     snow: "snow.svg",
@@ -135,4 +147,11 @@ function setIcon(icon, iconData) {
     icon.src = module.default;
     icon.alt = iconData;
   });
+}
+
+// creates and returns a text element with specified text
+function createTextElement(tag, text) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  return element;
 }
