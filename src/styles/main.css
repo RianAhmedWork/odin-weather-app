@@ -41,10 +41,6 @@ body {
   flex-direction: column;
 }
 
-body > * {
-  border: 2px solid black;
-}
-
 header {
   flex: 1 1 0;
   display: flex;
@@ -52,6 +48,7 @@ header {
   align-items: center;
   padding: 0 10px;
   background-color: var(--nord0);
+  border-bottom: 5px solid var(--nord1);
 }
 
 main {
@@ -136,6 +133,7 @@ header > form > label {
 #temp-toggle {
   font-size: 1.3rem;
   border: 3px solid var(--nord0);
+  border-radius: 5px;
 }
 
 .days {
@@ -157,4 +155,5 @@ footer {
   align-items: center;
   gap: 10px;
   background-color: var(--nord0);
+  border-top: 5px solid var(--nord1);
 }
