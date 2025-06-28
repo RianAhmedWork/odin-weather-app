@@ -7,7 +7,6 @@ function searchLocation() {
 
   button.addEventListener("click", async (event) => {
     event.preventDefault();
-    //console.log("hello");
     clearMain();
     createLoadingTitle();
     const result = await getLocationData(userQuery.value.trim().toLowerCase());
@@ -23,7 +22,7 @@ function displayData(result) {
   } else {
     clearMain();
     createLocationTitle(result);
-    createToggleButton();
+    createToggleButton(result);
     createCurrentDay(result);
     createUpcomingDays(result);
   }
@@ -60,10 +59,36 @@ function createLocationTitle(result) {
 }
 
 // Creates and appends a toggle temperature button to the main
-function createToggleButton() {
+function createToggleButton(result) {
   const main = document.querySelector("main");
-  const toggleButton = createTextElement("button", "Toggle Temperature");
+  const toggleButton = createTextElement("button", "Switch to °C");
+  toggleButton.addEventListener("click", () =>
+    toggleTemperature(result, toggleButton)
+  );
   main.append(toggleButton);
+}
+
+// Function that toggles the temperatures from F to C and vice versa
+function toggleTemperature(result, button) {
+  const temperaturesF = document.querySelectorAll(".farenheight");
+  const temperaturesC = document.querySelectorAll(".celcius");
+  if (temperaturesF.length > 0) {
+    button.textContent = "Switch to °F";
+    temperaturesF.forEach((element, index) => {
+      const temperatureC = ((result.days[index].temp - 32) / 1.8).toFixed(1);
+      element.textContent = `${temperatureC} °C`;
+      element.classList.remove("farenheight");
+      element.classList.add("celcius");
+    });
+  } else {
+    button.textContent = "Switch to °C";
+    temperaturesC.forEach((element, index) => {
+      const temperatureF = result.days[index].temp.toFixed(1);
+      element.textContent = `${temperatureF} °F`;
+      element.classList.remove("celcius");
+      element.classList.add("farenheight");
+    });
+  }
 }
 
 // Creates and appends the current day with weather information
@@ -72,7 +97,8 @@ function createCurrentDay(result) {
   setIcon(icon, result.days[0].icon);
 
   const temperature = document.createElement("h2");
-  temperature.textContent = `${result.days[0].temp} Degrees Farenheight`;
+  temperature.classList.add("farenheight");
+  temperature.textContent = `${result.days[0].temp} °F`;
 
   const temperatureWeatherDiv = document.createElement("div");
   temperatureWeatherDiv.id = "temp-weather";
@@ -109,7 +135,8 @@ function createUpcomingDays(result) {
     setIcon(icon, result.days[i].icon);
 
     const temperature = document.createElement("p");
-    temperature.textContent = `${result.days[i].temp} Degrees Farenheight`;
+    temperature.classList.add("farenheight");
+    temperature.textContent = `${result.days[i].temp} °F`;
 
     const date = document.createElement("p");
     date.textContent = result.days[i].datetime;
@@ -137,8 +164,8 @@ function setIcon(icon, iconData) {
     cloudy: "cloudy.svg",
     "partly-cloudy-day": "partly-cloudy-day.svg",
     "partly-cloudy-night": "partly-cloudy-night.svg",
-    "clear-day": "clear-day",
-    "night-day": "clear-night",
+    "clear-day": "clear-day.svg",
+    "clear-night": "clear-night.svg",
   };
 
   const fileName = iconMap[iconData];
