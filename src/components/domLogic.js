@@ -1,6 +1,7 @@
 import { getLocationData } from "./logic";
 export { searchLocation };
 
+// Searches the location on button click
 function searchLocation() {
   const button = document.getElementById("search-submit");
   const userQuery = document.getElementById("city-search");

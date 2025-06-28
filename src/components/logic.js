@@ -1,5 +1,6 @@
 export { getLocationData };
 
+// A function to get the data from the api
 async function getLocationData(query) {
   try {
     const url =
@@ -11,22 +12,20 @@ async function getLocationData(query) {
       throw new Error(`HTTP error! error code: ${search.status}`);
     }
     const locationData = await search.json();
-    console.log(locationData);
     const days = locationData.days.slice(0, 7);
     const name = locationData.resolvedAddress;
     const currentLocation = new Location(days, name);
-    console.log(name);
-    console.log(days);
-    console.log(currentLocation);
     return currentLocation;
   } catch (error) {
-    console.log(`There has been an error ${error}`);
+    console.err(`There has been an error ${error}`);
     return error;
   }
 }
 
+// creates a location object
 class Location {
   constructor(days, name) {
-    (this.days = days), (this.name = name);
+    this.days = days;
+    this.name = name;
   }
 }
