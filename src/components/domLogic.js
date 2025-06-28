@@ -63,6 +63,7 @@ function createLocationTitle(result) {
 function createToggleButton(result) {
   const main = document.querySelector("main");
   const toggleButton = createTextElement("button", "Switch to °C");
+  toggleButton.id = "temp-toggle";
   toggleButton.addEventListener("click", () =>
     toggleTemperature(result, toggleButton)
   );
@@ -119,6 +120,7 @@ function createCurrentDay(result) {
   description.textContent = result.days[0].description;
 
   const currentDayDiv = document.createElement("div");
+  currentDayDiv.id = "current-day";
   currentDayDiv.append(temperatureWeatherDiv, dateConditionDiv, description);
 
   const main = document.querySelector("main");

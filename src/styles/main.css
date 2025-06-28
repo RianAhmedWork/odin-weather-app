@@ -1,7 +1,39 @@
+:root {
+  --nord0: #2e3440;
+  --nord1: #3b4252;
+  --nord2: #434c5e;
+  --nord3: #4c566a;
+  --nord4: #d8dee9;
+  --nord8: #88c0d0;
+  --nord9: #81a1c1;
+  --nord10: #5e81ac;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto-Regular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+a:link {
+  color: var(--nord9);
+}
+
+a:visited {
+  color: var(--nord10);
+}
+
+a:hover {
+  color: var(--nord8);
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: var(--nord4);
 }
 
 body {
@@ -19,6 +51,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  background-color: var(--nord0);
 }
 
 main {
@@ -27,6 +60,39 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background-color: var(--nord3);
+  gap: 10px;
+}
+
+button {
+  color: var(--nord0);
+  background-color: var(--nord4);
+  border: none;
+  transition: transform 0.2s ease;
+  border-radius: 2px;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input {
+  color: var(--nord0);
+  background-color: var(--nord4);
+  border-radius: 2px;
+  border: none;
+}
+
+input:focus {
+  outline: 2px solid var(--nord8);
+}
+
+header > form > * {
+  font-size: 1rem;
+}
+
+header > form > label {
+  font-size: 1.3rem;
 }
 
 #date-condition {
@@ -41,24 +107,47 @@ main {
   align-items: center;
 }
 
+#temp-weather > img {
+  width: 300px;
+  height: 200px;
+}
+
 #current-day {
   display: flex;
   flex-direction: column;
+  background-color: var(--nord4);
+  color: var(--nord0);
+  border-radius: 10px;
+  padding: 10px;
+  border: 3px solid var(--nord0);
 }
 
 #upcoming-days {
   display: flex;
   gap: 10px;
+  background-color: var(--nord4);
+  color: var(--nord0);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 3px solid var(--nord0);
+}
+
+#temp-toggle {
+  font-size: 1.3rem;
+  border: 3px solid var(--nord0);
 }
 
 .days {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
-main > * {
-  border: 2px solid red;
+.days > img {
+  width: 150px;
+  height: 100px;
 }
 
 footer {
@@ -67,4 +156,5 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background-color: var(--nord0);
 }
