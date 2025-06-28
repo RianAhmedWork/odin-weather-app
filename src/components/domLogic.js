@@ -23,7 +23,7 @@ function displayData(result) {
     createLocationTitle(result);
     createToggleButton();
     createCurrentDay(result);
-    //createUpcomingDays(result);
+    createUpcomingDays(result);
   }
 }
 
@@ -59,8 +59,7 @@ function createToggleButton() {
 
 function createCurrentDay(result) {
   const icon = document.createElement("img");
-  icon.src = "./assets/icons/day.svg";
-  icon.alt = "icon";
+  setIcon(icon, result.days[0].icon);
 
   const temperature = document.createElement("h2");
   temperature.textContent = `${result.days[0].temp} Degrees Farenheight`;
@@ -90,11 +89,78 @@ function createCurrentDay(result) {
 }
 
 function createUpcomingDays(result) {
-  result.upcomingDays.forEach((day) => {
+  const main = document.querySelector("main");
+  const upcomingDaysDiv = document.createElement("div");
+  upcomingDaysDiv.id = "upcoming-days";
+
+  for (let i = 1; i < 7; i++) {
     const icon = document.createElement("img");
-    icon.src = "./assets/icons/day.svg";
+    setIcon(icon, result.days[i].icon);
 
     const temperature = document.createElement("p");
-    //temperature.textContent = day.
-  });
+    temperature.textContent = `${result.days[i].temp} Degrees Farenheight`;
+
+    const date = document.createElement("p");
+    date.textContent = result.days[i].datetime;
+
+    const condition = document.createElement("p");
+    condition.textContent = result.days[i].conditions;
+
+    const dayDiv = document.createElement("div");
+    dayDiv.classList.add("days");
+    dayDiv.append(icon, temperature, date, condition);
+
+    upcomingDaysDiv.appendChild(dayDiv);
+  }
+
+  main.appendChild(upcomingDaysDiv);
+}
+
+function setIcon(icon, iconData) {
+  if (iconData === "snow") {
+    import("../assets/icons/snow.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "rain") {
+    import("../assets/icons/rain.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "fog") {
+    import("../assets/icons/fog.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "wind") {
+    import("../assets/icons/wind.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "cloudy") {
+    import("../assets/icons/cloudy.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "partly-cloudy-day") {
+    import("../assets/icons/partly-cloudy-day.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "partly-cloudy-night") {
+    import("../assets/icons/partly-cloudy-night.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "clear-day") {
+    import("../assets/icons/clear-day.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  } else if (iconData === "clear-night") {
+    import("../assets/icons/clear-night.svg").then((module) => {
+      icon.src = module.default;
+      icon.alt = iconData;
+    });
+  }
 }
